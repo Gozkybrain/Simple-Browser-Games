@@ -75,6 +75,4 @@ This project is a property of **The Sarcastic Geeks Trybe** – a vibrant commun
 - **Web3 NFT Rewards**: Mint NFTs for high scores, daily streaks, or special achievements.
 - **AI Opponent Mode**: Compete against a growing alien snake AI bot in later versions.
 
----
 
-Made with caffeine, creativity, and cosmic vibes.
