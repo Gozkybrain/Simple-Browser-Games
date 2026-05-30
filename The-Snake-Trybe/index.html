@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Alien Snake - Sarcastic Geeks Trybe</title>
+  <link rel="stylesheet" href="./src/style.css" />
+  <link rel="icon" type="image/png" href="./src//IMG_4610.PNG" />
+  <meta name="theme-color" content="#000101">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="#000101" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+  <!-- Background stars animation (space theme) -->
+  <div class="stars-container">
+    <div class="stars"></div>
+    <div class="stars2"></div>
+    <div class="stars3"></div>
+  </div>
+
+  <!-- ========== MAIN MENU ========== -->
+  <div id="mainMenu" class="menu-container">
+    <div class="menu-content">
+      <h1 class="game-title">
+        <span class="alien-text">ALIEN</span>
+        <span class="snake-text">SNAKE</span>
+      </h1>
+
+      <div class="menu-buttons">
+        <!-- Shows user info or login link -->
+        <div class="auth-box"></div>
+        <!-- Button to start the game -->
+        <button id="start-button" class="neon-button">
+          START GAME
+        </button>
+        <!-- Button to show instructions -->
+        <button id="instructions-button" class="neon-button">
+          INSTRUCTIONS
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== GAME AREA ========== -->
+  <div id="gameContainer" class="game-container hidden">
+    <div class="game-header">
+      <!-- Score display -->
+      <div class="score-display">
+        <span class="score-label">SCORE</span>
+        <span id="score" class="score-value">0</span>
+      </div>
+
+      <!-- Pause button -->
+      <button id="pause-button" class="pause-btn">⏸️</button>
+    </div>
+
+    <!-- Main game canvas where the snake moves -->
+    <canvas id="gameCanvas" width="400" height="400"></canvas>
+
+    <!-- On-screen controls for mobile players -->
+    <div class="mobile-controls">
+      <div class="control-row">
+        <button class="control-btn" data-direction="up">↑</button>
+      </div>
+      <div class="control-row">
+        <button class="control-btn" data-direction="left">←</button>
+        <button class="control-btn" data-direction="down">↓</button>
+        <button class="control-btn" data-direction="right">→</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== LEADERBOARD ========== -->
+  <div id="leaderboard" class="menu-container hidden">
+    <div class="menu-content">
+      <!-- Show user info if logged in -->
+      <div class="auth-box"></div>
+
+      <!-- List of top scores -->
+      <div id="leaderboardList" class="leaderboard-list">
+        <p>🚀 You've reached your play limit for today.</p>
+        <p>🌌 Please come back tomorrow to continue your galactic journey.</p>
+      </div>
+
+      <!-- Button to reload the page (refresh leaderboard) -->
+      <button id="leaderboard-back-buttons" class="neon-button" onclick="location.reload();">
+        RELOAD PAGE
+      </button>
+    </div>
+  </div>
+
+  <!-- ========== INSTRUCTIONS ========== -->
+  <div id="instructions" class="menu-container hidden">
+    <div class="menu-content">
+      <h2 class="menu-title">MISSION BRIEFING</h2>
+      <div class="instructions-content">
+        <!-- How to play the game -->
+        <p>🐍 Control your alien serpent to collect energy orbs.</p>
+        <p>⌨️ Desktop: Use arrow keys to navigate.</p>
+        <p>📱 Mobile: Use on-screen controls or swipe gestures.</p>
+        <p>💎 Each orb increases your score and length.</p>
+        <p>⚠️ Avoid hitting walls or your own tail.</p>
+        <p>🏆 Compete for the highest score in the galaxy!</p>
+        <hr />
+        <!-- Rules for account and plays -->
+        <p>🛑 <strong>Account activation required:</strong> You must have an <strong>activated account</strong> to play.
+        </p>
+        <p>🚫 <strong>One session per day:</strong> After submitting your score to your balance, you cannot play again
+          until the next day.</p>
+        <p>🔁 <strong>3 plays per session:</strong> You can replay up to <strong>3 times</strong> and build your score
+          before submitting.</p>
+      </div>
+
+      <!-- Button to go back to the main menu -->
+      <button id="instructions-back-button" class="neon-button">BACK TO MENU</button>
+    </div>
+  </div>
+
+  <!-- ========== GAME OVER MODAL ========== -->
+  <div id="gameOverModal" class="modal hidden">
+    <div class="modal-content">
+      <h2 class="modal-title">MISSION FAILED</h2>
+      <!-- Show the player's final score -->
+      <p class="final-score">
+        Final Score: <span id="finalScore">0</span>
+      </p>
+
+      <!-- Show user info or login prompt -->
+      <div class="auth-box"></div>
+
+      <!-- Options after game over -->
+      <div class="modal-buttons">
+        <!-- Save your score -->
+        <button id="submit-score-button" class="neon-button">SUBMIT SCORE</button>
+
+        <!-- Play again (max 3 tries per day) -->
+        <button id="play-again-button" class="neon-button secondary">PLAY AGAIN</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== GAME SCRIPTS ========== -->
+  <!-- Firebase setup (auth, database) -->
+  <script type="module" src="./src/firebase.js"></script>
+
+  <!-- Main game logic -->
+  <script type="module" src="./src/game.js"></script>
+
+  <!-- Page interaction & UI logic -->
+  <script type="module" src="./src/main.js"></script>
+</body>
+
+</html>
