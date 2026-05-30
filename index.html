@@ -194,6 +194,23 @@
             text-transform: uppercase;
         }
 
+        .footer-links {
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links a {
+            color: var(--primary);
+            text-decoration: none;
+            margin: 0 1rem;
+            transition: var(--transition);
+            opacity: 0.7;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            text-shadow: 0 0 10px var(--primary);
+        }
+
         /* Tech detailing */
         .corner {
             position: absolute;
@@ -333,7 +350,11 @@
     </div>
 
     <footer>
-        &copy; 2026 EXTATERRESTRIAL NODE 001 // ALL SYSTEMS STABLE
+        <div class="footer-links">
+            <a href="README.md">How to Play</a> | 
+            <a href="CODE_OF_CONDUCT.md">Code of Conduct</a>
+        </div>
+        &copy; 2026 SARCASTIC GEEK // ERROR 404: SERIOUSNESS NOT FOUND
     </footer>
 
     <script>
