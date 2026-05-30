@@ -1,0 +1,348 @@
+*{
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+    font-family:font;
+    
+}
+@font-face{
+    font-family:font;
+    src:url(font.ttf);
+}
+body{
+    height: 100vh;
+    width: 100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background :#325872;
+    position: relative;
+    padding: 10px;
+}
+:root{
+    --pour:none;
+    --zi:0;
+}
+.holder{
+    position:fixed;
+    bottom:20px;
+    width :auto;
+    max-width:310px;
+    width :100%;
+    height :50px;
+    
+    display:flex;
+    
+    justify-content: space-between;
+}
+.moves{
+    width: 47% ;
+    height: 100% ;
+    color: #dfe9f5; 
+    background :#161a22;
+    border-radius: 5px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+.moves2{
+    width:47%;
+    height: 100%;
+    color: #dfe9f5;
+    background :#161a22;
+    border-radius: 5px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+.snd{
+    width :210px;
+    height :210px;
+    background :rgba(225,225,225,.1);
+    position : absolute;
+    margin:auto;
+    top:0px;
+    width: 315px;
+    height: 315px;
+    opacity :.5;
+    border-radius: 15px;
+    border:6px solid rgba(0,0,0,.7);
+    background: #161a22;
+    display:flex;
+    scale :.65;
+    display : none ;
+}
+.container{
+    width: 315px;
+    height: 315px;
+    /* top:85px; */
+    border-radius: 15px;
+    border:6px solid rgba(0,0,0,.7);
+    background: #161a22;
+    display:flex;
+    position : relative ;
+    box-shadow:10px 9px rgba(0,0,0,.2);
+}
+.wrapper{
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0);
+    
+    border-radius: inherit;
+}
+.wrapper ul::before{
+    content: "";
+    position: absolute;
+    width: 95.75%;
+    height: 95.75%;
+    transition:  .75s all;
+    visibility: hidden;
+    background-image: none;
+    opacity: 0;
+    border-radius: px;
+    left:6.5px;
+
+}
+.wrapper ul.show-background::before{
+    opacity: 1;
+    visibility: visible;
+    z-index: 100;
+    background-image: url(crown.png);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 5px ;
+    z-index: 10;
+    top: 6px;
+}
+ul{
+    width: 100%;
+    height: 100%;
+    list-style-type:none; 
+    line-height: 0px; 
+    border-radius: 14px;
+    position :relative;
+    justify-content: center;
+    align-items:center;
+    padding:7.5px;
+    
+}
+li{
+    border:3px solid inherit;
+    border-radius:3px;
+    padding:15px 7px;
+    display: flex;
+    justify-content: baseline;
+    align-items: end;
+    font-size:20px;
+    font-weight: 1000;
+    transition:.2s ;
+    color: #161a22;
+    cursor:pointer;
+    background-size:100%;
+    background-repeat:no-repeat;
+    opacity: 1;
+    background-position:center;
+    position: absolute;
+}
+.wrapper ul.show-background li{
+    visibility: hidden;
+    opacity: 0;
+}
+li::before{
+    position: absolute;
+    content:"";
+    background:transperent;
+    width:100%;
+    height: 100%;
+    top:0;
+    border-radius: 4px;
+    border-bottom:2px solid #888;
+    left:0;
+}
+.empty{
+    background-image: none;
+    border:none;
+    background-size:100%;
+    background-repeat:no-repeat;
+    background-position:center;
+    z-index:-1;
+}
+.empty::before{
+    border: none;
+}
+.shake{
+    opacity:.5;
+}
+.wrapper1{
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0);
+    
+    border-radius: inherit;
+}
+@media screen and (min-width:450px){
+    .container {
+        scale:1.3;
+    }
+}
+.three li{
+    width: 30.5%;
+    height:30%;
+}
+.four li{
+    width: 22.9%;
+    height: 22.5%;
+}
+.five li{
+    width: 17.9%;
+    height: 17.5%;
+}
+.three .join{
+    width:31.8%;
+    height :31.8%;
+    border:0px solid inherit;
+    border-radius:0px;
+}
+.score{
+    position : fixed ;
+    width :220px;
+    /* height :50px; */
+    padding :10px 5px;
+    
+    display :flex;
+    justify-content: space-between;
+    top:15px;
+}
+.s1{
+    height :100%;
+    width :47%;
+    color: #dfe9f5;
+    background :#161a22;
+    border-radius:5px;
+    padding-top:5px;
+    text-align: center ;
+    
+}
+.dd{
+    
+}
+.four .join{
+    width: 24.3%;
+    height: 24.3%;
+    border:0px solid inherit;
+    border-radius:0px;
+    transition:.5s ;
+}
+.five .join{
+    width: 19.3%;
+    height: 19.3%;
+    border-radius: 0px;
+}
+.join::before {
+    display : none ;
+}
+
+.selection{
+    max-width: 200px;
+    width: 100%;
+    height: 200px;
+    
+    display: flex;
+    flex-wrap: wrap;
+
+}
+.selection .options{
+    height: 55px;
+    width: 100%;
+    font-size:20px;
+    background-color: #111 ;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    position: relative;
+    cursor: pointer;
+}
+.options::before{
+    left: 0px;
+    bottom: -4px;
+    border-radius: 5px;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    z-index: -1;
+}
+
+.detect-gameover{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.7);
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    display: none;
+}
+.detect-gameover .game-outcome-holder{
+    max-width: 400px;
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    padding: 20px 10px;
+    background-color:#f2f2f2 ;
+
+}
+.medal-logo{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    transform: translateY(-50px);
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-image: url(medal.svg);
+    margin: auto;
+    /* background-color: #f9f9f9; */
+}
+.won-txt{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.won-txt h1{
+    color: #000;
+    font-weight: bolder;
+    font-size: 50px;
+    transform: translateY(-30px);
+    
+}
+.options-exit{
+    height: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 10px;
+    margin-top: 10px;
+}
+.options-exit button {
+    height: 100%;
+    outline: none;
+    border-radius: 5px;
+    border: none;
+    padding: 0px 10px;
+    background-color: #000;
+}
+button svg{
+    width: 70%;
+    height: 70%;
+}
+.options-exit .nxt-lvl{
+    font-size:large;
+    font-weight: bolder;
+    padding: 0px 2  0px;
+    color: #fff;
+}

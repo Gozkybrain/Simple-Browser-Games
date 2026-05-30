@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sarcastic Geek | Alien Arcade</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00f2ff;
+            --secondary: #ff00ff;
+            --accent: #39ff14;
+            --bg-dark: #050510;
+            --card-bg: rgba(15, 15, 35, 0.7);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #fff;
+            font-family: 'Exo 2', sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Alien Background Effect */
+        .stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at center, #1a1a3a 0%, #050510 100%);
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: twinkle var(--duration) infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* Scanline Effect */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 100;
+            background-size: 100% 4px, 3px 100%;
+            pointer-events: none;
+        }
+
+        header {
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            letter-spacing: 0.5rem;
+            text-transform: uppercase;
+            color: #fff;
+            text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary), 0 0 40px var(--primary);
+            animation: pulse 2s infinite;
+        }
+
+        .subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            color: var(--secondary);
+            margin-top: 1rem;
+            letter-spacing: 0.3rem;
+            text-transform: uppercase;
+            opacity: 0.8;
+        }
+
+        @keyframes pulse {
+            0%, 100% { text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary); }
+            50% { text-shadow: 0 0 20px var(--primary), 0 0 40px var(--primary), 0 0 60px var(--primary); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .game-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 242, 255, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            position: relative;
+            cursor: pointer;
+            transition: var(--transition);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 250px;
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(transparent, var(--primary), transparent, transparent);
+            animation: rotate 4s linear infinite;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .game-card:hover::before {
+            opacity: 1;
+        }
+
+        .game-card::after {
+            content: '';
+            position: absolute;
+            inset: 3px;
+            background: var(--bg-dark);
+            border-radius: 12px;
+            z-index: 1;
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0, 242, 255, 0.3);
+        }
+
+        .game-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: var(--primary);
+        }
+
+        .game-desc {
+            font-size: 0.95rem;
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        footer {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Tech detailing */
+        .corner {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--primary);
+            opacity: 0.5;
+        }
+        .top-left { top: 10px; left: 10px; border-right: none; border-bottom: none; }
+        .top-right { top: 10px; right: 10px; border-left: none; border-bottom: none; }
+        .bottom-left { bottom: 10px; left: 10px; border-right: none; border-top: none; }
+        .bottom-right { bottom: 10px; right: 10px; border-left: none; border-top: none; }
+
+    </style>
+</head>
+<body>
+
+    <div class="stars-container" id="stars"></div>
+
+    <header>
+        <div class="logo">Sarcastic Geek</div>
+        <div class="subtitle">Mostly Stable Neural Interface // Error 404: Seriousness Not Found</div>
+    </header>
+
+    <div class="container">
+        <div class="game-grid">
+            <!-- Snake Game -->
+            <div class="game-card" onclick="window.location.href='Snake_game/index.html'">
+                <div class="corner top-left"></div><div class="corner top-right"></div>
+                <div class="corner bottom-left"></div><div class="corner bottom-right"></div>
+                <div class="card-content">
+                    <h3 class="game-title">Snake Game</h3>
+                    <p class="game-desc">Navigate the digital abyss. Consume data fragments to grow but avoid the recursive walls.</p>
+                </div>
+            </div>
+
+            <!-- Memory Cards -->
+            <div class="game-card" onclick="window.location.href='memory_cards_game/index.html'">
+                <div class="corner top-left"></div><div class="corner top-right"></div>
+                <div class="corner bottom-left"></div><div class="corner bottom-right"></div>
+                <div class="card-content">
+                    <h3 class="game-title">Memory Cards Game</h3>
+                    <p class="game-desc">Synchronize your cognitive sensors. Match the holographic data patterns before the timer expires.</p>
+                </div>
+            </div>
+
+            <!-- Sudoku -->
+            <div class="game-card" onclick="window.location.href='sudoku_game/index.html'">
+                <div class="corner top-left"></div><div class="corner top-right"></div>
+                <div class="corner bottom-left"></div><div class="corner bottom-right"></div>
+                <div class="card-content">
+                    <h3 class="game-title">Sudoku Game</h3>
+                    <p class="game-desc">Decipher the geometric sequences. Fill the grid with non-repeating data packets.</p>
+                </div>
+            </div>
+
+            <!-- Chicken Hop -->
+            <div class="game-card" onclick="window.location.href='chicken_hop/index.html'">
+                <div class="corner top-left"></div><div class="corner top-right"></div>
+                <div class="corner bottom-left"></div><div class="corner bottom-right"></div>
+                <div class="card-content">
+                    <h3 class="game-title">Chicken Hop</h3>
+                    <p class="game-desc">Traverse the multidimensional highways. Avoid high-velocity energy streams at all costs.</p>
+                </div>
+            </div>
+
+            <!-- Hangman -->
+            <div class="game-card" onclick="window.location.href='hangman_game/index.html'">
+                <div class="corner top-left"></div><div class="corner top-right"></div>
+                <div class="corner bottom-left"></div><div class="corner bottom-right"></div>
+                <div class="card-content">
+                    <h3 class="game-title">Hangman Game</h3>
+                    <p class="game-desc">Decrypt the hidden transmission. Failure to identify the characters leads to system termination.</p>
+                </div>
+            </div>
+
+            <!-- Simon Game -->
+            <div class="game-card" onclick="window.location.href='Simon_game/index.html'">
+                <div class="corner top-left"></div><div class="corner top-right"></div>
+                <div class="corner bottom-left"></div><div class="corner bottom-right"></div>
+                <div class="card-content">
+                    <h3 class="game-title">Simon Game</h3>
+                    <p class="game-desc">Replicate the orbital pulse. Follow the frequency patterns to unlock deeper sectors.</p>
+                </div>
+            </div>
+
+            <!-- Sliding Puzzle -->
+            <div class="game-card" onclick="window.location.href='Sliding_Puzzle_game/index.html'">
+                <div class="corner top-left"></div><div class="corner top-right"></div>
+                <div class="corner bottom-left"></div><div class="corner bottom-right"></div>
+                <div class="card-content">
+                    <h3 class="game-title">Sliding Puzzle Game</h3>
+                    <p class="game-desc">Realign the fragmented data segments to restore the core holographic image.</p>
+                </div>
+            </div>
+
+            <!-- Coloron -->
+            <div class="game-card" onclick="window.location.href='coloron_game/index.html'">
+                <div class="corner top-left"></div><div class="corner top-right"></div>
+                <div class="corner bottom-left"></div><div class="corner bottom-right"></div>
+                <div class="card-content">
+                    <h3 class="game-title">Coloron Game</h3>
+                    <p class="game-desc">Match the orbital color frequency to bypass the chromatic security filters.</p>
+                </div>
+            </div>
+
+            <!-- Tower Game -->
+            <div class="game-card" onclick="window.location.href='tower_game-master/index.html'">
+                <div class="corner top-left"></div><div class="corner top-right"></div>
+                <div class="corner bottom-left"></div><div class="corner bottom-right"></div>
+                <div class="card-content">
+                    <h3 class="game-title">Tower Game</h3>
+                    <p class="game-desc">Construct a precarious vertical monolith. Gravity is merely a suggestion until it isn't.</p>
+                </div>
+            </div>
+
+            <!-- Number Slide -->
+            <div class="game-card" onclick="window.location.href='number_slide/index.html'">
+                <div class="corner top-left"></div><div class="corner top-right"></div>
+                <div class="corner bottom-left"></div><div class="corner bottom-right"></div>
+                <div class="card-content">
+                    <h3 class="game-title">Number Slide</h3>
+                    <p class="game-desc">Rearrange the numerical matrix. It's like regular sliding, but with math. Fun, right?</p>
+                </div>
+            </div>
+
+            <!-- The Snake Trybe -->
+            <div class="game-card" onclick="window.location.href='The-Snake-Trybe/index.html'">
+                <div class="corner top-left"></div><div class="corner top-right"></div>
+                <div class="corner bottom-left"></div><div class="corner bottom-right"></div>
+                <div class="card-content">
+                    <h3 class="game-title">The Snake Trybe</h3>
+                    <p class="game-desc">Another snake variation. Because one wasn't enough for your insatiable reptilian needs.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 EXTATERRESTRIAL NODE 001 // ALL SYSTEMS STABLE
+    </footer>
+
+    <script>
+        // Create dynamic star background
+        const starsContainer = document.getElementById('stars');
+        const starCount = 150;
+
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            
+            const size = Math.random() * 3;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.left = `${Math.random() * 100}%`;
+            
+            star.style.setProperty('--duration', `${2 + Math.random() * 4}s`);
+            star.style.animationDelay = `${Math.random() * 5}s`;
+            
+            starsContainer.appendChild(star);
+        }
+
+        // Add subtle mouse parallax
+        document.addEventListener('mousemove', (e) => {
+            const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
+            const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
+            starsContainer.style.transform = `translate(${moveX}px, ${moveY}px)`;
+        });
+    </script>
+</body>
+</html>
